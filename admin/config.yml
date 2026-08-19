@@ -1,0 +1,126 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "admin/uploads"
+public_folder: "/admin/uploads"
+
+collections:
+  - name: "content"
+    label: "Website Text"
+    files:
+      - name: "site"
+        label: "Forward Collective — Site Text"
+        file: "content.json"
+        fields:
+          - {label: "Hero — Eyebrow tag", name: "hero.eyebrow", widget: "string"}
+          - {label: "Hero — Headline (supports <br> and <em>text</em>)", name: "hero.h1", widget: "string"}
+          - {label: "Hero — Signoff line", name: "hero.signoff", widget: "string"}
+          - {label: "Hero — Intro paragraph", name: "hero.lede", widget: "text"}
+          - {label: "Collective — Eyebrow tag", name: "collective.eyebrow", widget: "string"}
+          - {label: "Collective — Headline (supports <em>text</em>)", name: "collective.h2", widget: "string"}
+          - {label: "Collective — Paragraph", name: "collective.p", widget: "text"}
+          - {label: "Team — Dara: Role title", name: "team.dara.role", widget: "string"}
+          - {label: "Team — Dara: Expertise line", name: "team.dara.sub", widget: "string"}
+          - {label: "How We Help — Eyebrow tag", name: "help.eyebrow", widget: "string"}
+          - {label: "How We Help — Headline", name: "help.h2", widget: "string"}
+          - {label: "How We Help — Paragraph", name: "help.p", widget: "text"}
+          - {label: "How We Help — Row 1 title", name: "help.row1.title", widget: "string"}
+          - {label: "How We Help — Row 1 description", name: "help.row1.desc", widget: "string"}
+          - {label: "How We Help — Row 2 title", name: "help.row2.title", widget: "string"}
+          - {label: "How We Help — Row 2 description", name: "help.row2.desc", widget: "string"}
+          - {label: "How We Help — Row 3 title", name: "help.row3.title", widget: "string"}
+          - {label: "How We Help — Row 3 description", name: "help.row3.desc", widget: "string"}
+          - {label: "How We Help — Row 4 title", name: "help.row4.title", widget: "string"}
+          - {label: "How We Help — Row 4 description", name: "help.row4.desc", widget: "string"}
+          - {label: "How We Help — Row 5 title", name: "help.row5.title", widget: "string"}
+          - {label: "How We Help — Row 5 description", name: "help.row5.desc", widget: "string"}
+          - {label: "Healthcare — Eyebrow tag", name: "health.eyebrow", widget: "string"}
+          - {label: "Healthcare — Headline", name: "health.h2", widget: "string"}
+          - {label: "Healthcare — Paragraph", name: "health.p", widget: "text"}
+          - {label: "Healthcare — Card 1 title (Operations)", name: "health.card1.title", widget: "string"}
+          - {label: "Healthcare — Card 2 title (Compliance)", name: "health.card2.title", widget: "string"}
+          - {label: "Healthcare — Card 3 title (Clinical)", name: "health.card3.title", widget: "string"}
+          - {label: "Case Study — Eyebrow tag", name: "case.eyebrow", widget: "string"}
+          - {label: "Case Study — Headline", name: "case.h2", widget: "string"}
+          - {label: "Case Study — Paragraph", name: "case.p", widget: "text"}
+          - {label: "About — Eyebrow tag", name: "about.eyebrow", widget: "string"}
+          - {label: "About — Headline (supports <br> and <em>text</em>)", name: "about.h2", widget: "string"}
+          - {label: "About — Paragraph 1", name: "about.p1", widget: "text"}
+          - {label: "About — Paragraph 2", name: "about.p2", widget: "text"}
+          - {label: "Values — Eyebrow tag", name: "values.eyebrow", widget: "string"}
+          - {label: "Values — Headline", name: "values.h2", widget: "string"}
+          - {label: "Values — Subtext", name: "values.p", widget: "string"}
+          - {label: "Values — Column 1 label (Partnership)", name: "values.col1.label", widget: "string"}
+          - {label: "Values — Column 1 heading", name: "values.col1.h4", widget: "string"}
+          - {label: "Values — Column 1 text", name: "values.col1.p", widget: "string"}
+          - {label: "Values — Column 2 label (Intention)", name: "values.col2.label", widget: "string"}
+          - {label: "Values — Column 2 heading", name: "values.col2.h4", widget: "string"}
+          - {label: "Values — Column 2 text", name: "values.col2.p", widget: "text"}
+          - {label: "Values — Column 3 label (Momentum)", name: "values.col3.label", widget: "string"}
+          - {label: "Values — Column 3 heading", name: "values.col3.h4", widget: "string"}
+          - {label: "Values — Column 3 text", name: "values.col3.p", widget: "string"}
+          - {label: "Values — Column 4 label (Craft)", name: "values.col4.label", widget: "string"}
+          - {label: "Values — Column 4 heading", name: "values.col4.h4", widget: "string"}
+          - {label: "Values — Column 4 text", name: "values.col4.p", widget: "text"}
+          - {label: "Contact — Eyebrow tag", name: "contact.eyebrow", widget: "string"}
+          - {label: "Contact — Headline", name: "contact.h2", widget: "string"}
+          - {label: "Contact — Paragraph", name: "contact.p", widget: "string"}
+          - {label: "Contact — Point 1 title", name: "contact.point1.h5", widget: "string"}
+          - {label: "Contact — Point 1 text", name: "contact.point1.p", widget: "string"}
+          - {label: "Contact — Point 2 title", name: "contact.point2.h5", widget: "string"}
+          - {label: "Contact — Point 2 text", name: "contact.point2.p", widget: "text"}
+          - {label: "Contact — Point 3 title", name: "contact.point3.h5", widget: "string"}
+          - {label: "Contact — Point 3 text", name: "contact.point3.p", widget: "string"}
+          - {label: "Contact — Form footnote", name: "contact.form_note", widget: "string"}
+          - {label: "Contact — Success message title", name: "contact.success_h3", widget: "string"}
+          - {label: "Contact — Success message text", name: "contact.success_p", widget: "string"}
+          - {label: "Footer — Tagline", name: "footer.tagline", widget: "text"}
+          - {label: "Footer — Copyright line", name: "footer.copyright", widget: "string"}
+          - {label: "Navigation — \"Expertise\" link", name: "nav.expertise", widget: "string"}
+          - {label: "Navigation — \"Healthcare\" link", name: "nav.healthcare", widget: "string"}
+          - {label: "Navigation — \"Collective\" link", name: "nav.collective", widget: "string"}
+          - {label: "Navigation — \"About\" link", name: "nav.about", widget: "string"}
+          - {label: "Navigation — Mobile-only \"Contact\" link", name: "nav.mobile_contact", widget: "string"}
+          - {label: "Navigation — Header button (\"Start a conversation\")", name: "nav.cta_header", widget: "string"}
+          - {label: "Navigation — Mobile menu button (\"Start a conversation\")", name: "nav.cta_mobile", widget: "string"}
+          - {label: "Collective — \"Meet the full collective\" link", name: "collective.link", widget: "string"}
+          - {label: "Case Study — \"Explore selected work\" link", name: "case.link", widget: "string"}
+          - {label: "Case Study — Tag pill 1", name: "case.tag1", widget: "string"}
+          - {label: "Case Study — Tag pill 2", name: "case.tag2", widget: "string"}
+          - {label: "Case Study — Tag pill 3", name: "case.tag3", widget: "string"}
+          - {label: "Footer — Column 1 heading", name: "footer.col1.heading", widget: "string"}
+          - {label: "Footer — Column 2 heading", name: "footer.col2.heading", widget: "string"}
+          - {label: "Footer — Column 3 heading", name: "footer.col3.heading", widget: "string"}
+          - {label: "Footer — Focus Areas link 1", name: "footer.focus1", widget: "string"}
+          - {label: "Footer — Focus Areas link 2", name: "footer.focus2", widget: "string"}
+          - {label: "Footer — Focus Areas link 3", name: "footer.focus3", widget: "string"}
+          - {label: "Footer — Focus Areas link 4", name: "footer.focus4", widget: "string"}
+          - {label: "Footer — Get Started link 1", name: "footer.start1", widget: "string"}
+          - {label: "Footer — Get Started link 2", name: "footer.start2", widget: "string"}
+          - {label: "Footer — Get Started link 3", name: "footer.start3", widget: "string"}
+          - {label: "Contact Form — \"Name\" field label", name: "form.label_name", widget: "string"}
+          - {label: "Contact Form — \"Business Name\" field label", name: "form.label_business", widget: "string"}
+          - {label: "Contact Form — \"Email\" field label", name: "form.label_email", widget: "string"}
+          - {label: "Contact Form — \"Phone\" field label", name: "form.label_phone", widget: "string"}
+          - {label: "Contact Form — \"Website\" field label", name: "form.label_website", widget: "string"}
+          - {label: "Contact Form — \"Tell us about your business\" field label", name: "form.label_about", widget: "string"}
+          - {label: "Contact Form — \"What are you hoping to accomplish?\" field label", name: "form.label_goal", widget: "string"}
+          - {label: "Team — Blync.io: Tag", name: "team.blync.tag", widget: "string"}
+          - {label: "Team — Blync.io: Name", name: "team.blync.name", widget: "string"}
+          - {label: "Team — Blync.io: Expertise line", name: "team.blync.sub", widget: "string"}
+          - {label: "Team — Managed Tech: Tag", name: "team.managedtech.tag", widget: "string"}
+          - {label: "Team — Managed Tech: Name", name: "team.managedtech.name", widget: "string"}
+          - {label: "Team — Managed Tech: Expertise line", name: "team.managedtech.sub", widget: "string"}
+          - {label: "Team — Amanda: Tag", name: "team.amanda.tag", widget: "string"}
+          - {label: "Team — Amanda: Name", name: "team.amanda.name", widget: "string"}
+          - {label: "Team — Amanda: Expertise line", name: "team.amanda.sub", widget: "string"}
+          - {label: "Team — Jana: Tag", name: "team.jana.tag", widget: "string"}
+          - {label: "Team — Jana: Name", name: "team.jana.name", widget: "string"}
+          - {label: "Team — Jana: Expertise line", name: "team.jana.sub", widget: "string"}
+          - {label: "Team — Blync.io: Full bio", name: "team.blync.bio", widget: "text"}
+          - {label: "Team — Managed Tech: Full bio", name: "team.managedtech.bio", widget: "text"}
+          - {label: "Team — Amanda: Full bio", name: "team.amanda.bio", widget: "text"}
+          - {label: "Team — Jana: Full bio", name: "team.jana.bio", widget: "text"}
