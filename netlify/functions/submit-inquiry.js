@@ -71,7 +71,7 @@ exports.handler = async function (event) {
     if (!res.ok) {
       const detail = await res.text();
       console.error('GitHub API error:', res.status, detail);
-      return { statusCode: 502, body: JSON.stringify({ error: 'Could not save submission', debugStatus: res.status, debugDetail: detail.slice(0, 500) }) };
+      return { statusCode: 502, body: JSON.stringify({ error: 'Could not save submission' }) };
     }
 
     return { statusCode: 200, body: JSON.stringify({ success: true }) };
