@@ -1,4 +1,4 @@
-# Forward Collective — Website Concepts -
+# Forward Collective — Website Concepts
 
 Four self-contained, single-page landing page concepts for Forward Collective, a business growth
 partner offering strategy, operations, branding, and marketing services (with specialized healthcare
