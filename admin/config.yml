@@ -124,3 +124,22 @@ collections:
           - {label: "Team — Managed Tech: Full bio", name: "team.managedtech.bio", widget: "text"}
           - {label: "Team — Amanda: Full bio", name: "team.amanda.bio", widget: "text"}
           - {label: "Team — Jana: Full bio", name: "team.jana.bio", widget: "text"}
+
+  - name: "submissions"
+    label: "Form Submissions"
+    folder: "submissions"
+    create: false
+    delete: false
+    format: "json"
+    identifier_field: "name"
+    summary: "{{name}} — {{business}} — {{submittedAt}}"
+    sortable_fields: ["submittedAt", "name", "business"]
+    fields:
+      - {label: "Name", name: "name", widget: "string"}
+      - {label: "Business Name", name: "business", widget: "string"}
+      - {label: "Email", name: "email", widget: "string"}
+      - {label: "Phone", name: "phone", widget: "string", required: false}
+      - {label: "Website", name: "website", widget: "string", required: false}
+      - {label: "About their business", name: "about", widget: "text"}
+      - {label: "Goal", name: "goal", widget: "text"}
+      - {label: "Submitted At", name: "submittedAt", widget: "datetime"}

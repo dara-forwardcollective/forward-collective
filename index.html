@@ -907,7 +907,31 @@ Today, I bring that same philosophy to every client I work with. As your Busines
   var form = document.getElementById('inquiryForm');
   var success = document.getElementById('formSuccess');
   form.addEventListener('submit', function(e){
-    e.preventDefault(); form.style.display = 'none'; success.classList.add('show');
+    e.preventDefault();
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
+    if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+    var payload = {
+      name: document.getElementById('fName').value,
+      business: document.getElementById('fBusiness').value,
+      email: document.getElementById('fEmail').value,
+      phone: document.getElementById('fPhone').value,
+      website: document.getElementById('fWebsite').value,
+      about: document.getElementById('fAbout').value,
+      goal: document.getElementById('fGoal').value
+    };
+    fetch('/.netlify/functions/submit-inquiry', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if(!res.ok) throw new Error('Request failed');
+      form.style.display = 'none';
+      success.classList.add('show');
+    }).catch(function(){
+      if(submitBtn){ submitBtn.disabled = false; submitBtn.innerHTML = originalBtnHTML; }
+      alert('Something went wrong sending your message. Please try again or email us directly.');
+    });
   });
 
   // team carousel (reusable for multiple instances on the page)
