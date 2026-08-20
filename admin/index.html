@@ -4,6 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forward Collective — Content Editor</title>
+  <style>
+    /* Replace Decap CMS's built-in logo (an SVG wordmark, not text) with our own brand name. */
+    span[class*="IconWrapper-DecapLogoIcon"] svg { display: none; }
+    span[class*="IconWrapper-DecapLogoIcon"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 60px;
+    }
+    span[class*="IconWrapper-DecapLogoIcon"]::after {
+      content: "Blync.io";
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 2.4rem;
+      color: #1f2937;
+      letter-spacing: -0.02em;
+    }
+  </style>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>

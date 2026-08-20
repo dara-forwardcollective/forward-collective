@@ -24,6 +24,7 @@ collections:
           - {label: "Collective — Paragraph", name: "collective.p", widget: "text"}
           - {label: "Team — Dara: Role title", name: "team.dara.role", widget: "string"}
           - {label: "Team — Dara: Expertise line", name: "team.dara.sub", widget: "string"}
+          - {label: "Team — Dara: Full bio", name: "team.dara.bio", widget: "text"}
           - {label: "How We Help — Eyebrow tag", name: "help.eyebrow", widget: "string"}
           - {label: "How We Help — Headline", name: "help.h2", widget: "string"}
           - {label: "How We Help — Paragraph", name: "help.p", widget: "text"}
