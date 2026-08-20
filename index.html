@@ -524,6 +524,7 @@ footer{background:var(--forest-deeper); color:var(--on-dark-muted); padding-bloc
 @media (max-width:520px){.footer-top{grid-template-columns:1fr;}}
 
 </style>
+<script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 
@@ -1048,6 +1049,18 @@ Today, I bring that same philosophy to every client I work with. As your Busines
     })
     .catch(function(){});
 })();
+</script>
+
+<script>
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on('init', function(user){
+    if (!user) {
+      window.netlifyIdentity.on('login', function(){
+        document.location.href = '/admin/';
+      });
+    }
+  });
+}
 </script>
 
 </body>
