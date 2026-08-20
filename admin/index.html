@@ -128,6 +128,35 @@
       box-shadow: 0 0 0 3px rgba(199,164,90,.18) !important;
       background: rgba(27,36,27,.8) !important;
     }
+    /* Stop the browser's autofill from painting its own white/blue background over the field. */
+    input[class*="AuthInput"]:-webkit-autofill,
+    input[class*="AuthInput"]:-webkit-autofill:hover,
+    input[class*="AuthInput"]:-webkit-autofill:focus {
+      -webkit-text-fill-color: #f3efe0 !important;
+      -webkit-box-shadow: 0 0 0 1000px rgba(27,36,27,.9) inset !important;
+      box-shadow: 0 0 0 1000px rgba(27,36,27,.9) inset !important;
+      caret-color: #f3efe0;
+      transition: background-color 9999s ease-in-out 0s;
+    }
+    input[name="password"] { padding-right: 2.6rem !important; }
+
+    .bc-eye-toggle {
+      position: fixed;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      padding: 4px;
+      margin: 0;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: rgba(243,239,224,.5);
+      z-index: 10;
+      transition: color .2s ease;
+    }
+    .bc-eye-toggle:hover { color: rgba(243,239,224,.92); }
+    .bc-eye-toggle svg { width: 18px; height: 18px; display: block; }
 
     button[class*="LoginButton"] {
       width: 100% !important;
@@ -160,5 +189,43 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+  (function(){
+    var EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>';
+    var EYE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a20.6 20.6 0 0 1 5.06-5.94M9.9 4.24A10.9 10.9 0 0 1 12 4c7 0 11 7 11 7a20.6 20.6 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/></svg>';
+    var btn = null;
+
+    // Kept out of React's DOM tree (appended to <body>, not the form Decap renders)
+    // and positioned with rAF instead of a wrapper, so it never conflicts with React's reconciliation.
+    function loop(){
+      var pwd = document.querySelector('input[name="password"]');
+      if(pwd && pwd.offsetParent){
+        if(!btn){
+          btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'bc-eye-toggle';
+          btn.setAttribute('aria-label', 'Show password');
+          btn.innerHTML = EYE;
+          document.body.appendChild(btn);
+          btn.addEventListener('click', function(){
+            var showing = pwd.type === 'text';
+            pwd.type = showing ? 'password' : 'text';
+            btn.innerHTML = showing ? EYE : EYE_OFF;
+            btn.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+            pwd.focus();
+          });
+        }
+        var r = pwd.getBoundingClientRect();
+        btn.style.top = (r.top + r.height / 2) + 'px';
+        btn.style.left = (r.right - 34) + 'px';
+        btn.style.display = 'flex';
+      } else if(btn){
+        btn.style.display = 'none';
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  })();
+  </script>
 </body>
 </html>
