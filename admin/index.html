@@ -59,7 +59,6 @@
       gap: .6rem;
       min-height: 0;
       margin-bottom: 1.9rem;
-      animation: bcLoginRise .7s cubic-bezier(.16,1,.3,1) both;
     }
     span[class*="IconWrapper-DecapLogoIcon"] svg { display: none; }
     span[class*="IconWrapper-DecapLogoIcon"]::before {
@@ -95,7 +94,6 @@
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       box-shadow: 0 30px 70px -25px rgba(0,0,0,.55);
-      animation: bcLoginRise .7s .08s cubic-bezier(.16,1,.3,1) both;
     }
 
     form[class*="AuthForm"]::before {
@@ -180,11 +178,6 @@
       box-shadow: 0 14px 28px -10px rgba(199,164,90,.55);
     }
     button[class*="LoginButton"]:active { transform: translateY(0); }
-
-    @keyframes bcLoginRise {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
