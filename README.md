@@ -1,11 +1,11 @@
-# Forward Collective - Website Concepts
+# Forward Collective - Website Concepts.
 
 Four self-contained, single-page landing page concepts for Forward Collective, a business growth
 partner offering strategy, operations, branding, and marketing services (with specialized healthcare
 & behavioral health consulting).
 
 Each `.html` file is fully self-contained: fonts and images are inlined as base64 data URIs, so no
-build step, bundler, or external requests are needed. Plain static hosting is all that's required..
+build step, bundler, or external requests are needed. Plain static hosting is all that's required...
 
 ## Pages
 
