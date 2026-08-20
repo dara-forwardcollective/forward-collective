@@ -4,22 +4,155 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forward Collective — Content Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* Replace Decap CMS's built-in logo (an SVG wordmark, not text) with our own brand name. */
-    span[class*="IconWrapper-DecapLogoIcon"] svg { display: none; }
-    span[class*="IconWrapper-DecapLogoIcon"] {
-      display: inline-flex;
+    /* ---- Login screen: replace Decap's default look with a Blync.io branded design ---- */
+
+    section[class*="StyledAuthenticationPage"] {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 60px;
+      background:
+        radial-gradient(60% 55% at 18% 15%, rgba(199,164,90,.20) 0%, rgba(199,164,90,0) 60%),
+        radial-gradient(65% 60% at 85% 88%, rgba(199,164,90,.14) 0%, rgba(199,164,90,0) 60%),
+        linear-gradient(160deg, #1b241b 0%, #2f3b2f 55%, #202b20 100%);
+      overflow: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    section[class*="StyledAuthenticationPage"]::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(243,239,224,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(243,239,224,.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(70% 70% at 50% 50%, #000 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    section[class*="StyledAuthenticationPage"]::after {
+      content: "F";
+      position: absolute;
+      right: -4vw;
+      bottom: -14vh;
+      font-family: 'Fraunces', serif;
+      font-size: 52vw;
+      line-height: 1;
+      color: rgba(243,239,224,.035);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Logo mark: small gold compass tick + "Blync.io" wordmark */
+    span[class*="IconWrapper-DecapLogoIcon"] {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      min-height: 0;
+      margin-bottom: 1.9rem;
+      animation: bcLoginRise .7s cubic-bezier(.16,1,.3,1) both;
+    }
+    span[class*="IconWrapper-DecapLogoIcon"] svg { display: none; }
+    span[class*="IconWrapper-DecapLogoIcon"]::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      flex: none;
+      background: linear-gradient(135deg, #e4c584, #b8903f);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      box-shadow: 0 6px 18px -4px rgba(199,164,90,.65);
     }
     span[class*="IconWrapper-DecapLogoIcon"]::after {
       content: "Blync.io";
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-weight: 800;
-      font-size: 2.4rem;
-      color: #1f2937;
-      letter-spacing: -0.02em;
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 2.5rem;
+      color: #f3efe0;
+      letter-spacing: -0.01em;
+    }
+
+    form[class*="AuthForm"] {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: min(90vw, 400px);
+      padding: 2.6rem 2.4rem 2.4rem;
+      background: rgba(243,239,224,.055);
+      border: 1px solid rgba(243,239,224,.16);
+      border-radius: 18px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 30px 70px -25px rgba(0,0,0,.55);
+      animation: bcLoginRise .7s .08s cubic-bezier(.16,1,.3,1) both;
+    }
+
+    form[class*="AuthForm"]::before {
+      content: "Sign in to manage your site's content";
+      order: -1;
+      display: block;
+      margin: -.4rem 0 1.6rem;
+      font-size: .92rem;
+      color: rgba(243,239,224,.62);
+      text-align: center;
+    }
+
+    input[class*="AuthInput"] {
+      width: 100% !important;
+      box-sizing: border-box;
+      background: rgba(27,36,27,.55) !important;
+      border: 1px solid rgba(243,239,224,.18) !important;
+      border-radius: 10px !important;
+      padding: .85rem 1rem !important;
+      margin-bottom: 1rem !important;
+      color: #f3efe0 !important;
+      font-family: 'Inter', sans-serif !important;
+      font-size: .95rem !important;
+      transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    input[class*="AuthInput"]::placeholder { color: rgba(243,239,224,.42); }
+    input[class*="AuthInput"]:focus {
+      outline: none !important;
+      border-color: rgba(199,164,90,.75) !important;
+      box-shadow: 0 0 0 3px rgba(199,164,90,.18) !important;
+      background: rgba(27,36,27,.8) !important;
+    }
+
+    button[class*="LoginButton"] {
+      margin-top: .4rem !important;
+      padding: .9rem 1rem !important;
+      border: none !important;
+      border-radius: 10px !important;
+      background: linear-gradient(135deg, #e4c584, #b8903f) !important;
+      color: #23291d !important;
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 600 !important;
+      font-size: .95rem !important;
+      letter-spacing: .01em;
+      cursor: pointer;
+      transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease, filter .25s ease;
+    }
+    button[class*="LoginButton"]:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 14px 28px -10px rgba(199,164,90,.55);
+    }
+    button[class*="LoginButton"]:active { transform: translateY(0); }
+
+    @keyframes bcLoginRise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
