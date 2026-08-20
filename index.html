@@ -795,18 +795,20 @@ Today, I bring that same philosophy to every client I work with. As your Busines
       </div>
       <div class="reveal">
         <div class="form-card">
-          <form id="inquiryForm">
+          <form id="inquiryForm" name="contact" data-netlify="true" netlify-honeypot="fHoneypot">
+            <input type="hidden" name="form-name" value="contact">
+            <p style="position:absolute; left:-9999px;"><label>Don't fill this out if you're human: <input name="fHoneypot"></label></p>
             <div class="form-row">
-              <div class="field"><label for="fName" data-edit="form.label_name">Name</label><input id="fName" type="text" required placeholder="Your name"></div>
-              <div class="field"><label for="fBusiness" data-edit="form.label_business">Business Name</label><input id="fBusiness" type="text" required placeholder="Your business"></div>
+              <div class="field"><label for="fName" data-edit="form.label_name">Name</label><input id="fName" name="name" type="text" required placeholder="Your name"></div>
+              <div class="field"><label for="fBusiness" data-edit="form.label_business">Business Name</label><input id="fBusiness" name="business" type="text" required placeholder="Your business"></div>
             </div>
             <div class="form-row">
-              <div class="field"><label for="fEmail" data-edit="form.label_email">Email</label><input id="fEmail" type="email" required placeholder="you@business.com"></div>
-              <div class="field"><label for="fPhone" data-edit="form.label_phone">Phone</label><input id="fPhone" type="tel" placeholder="(555) 000-0000"></div>
+              <div class="field"><label for="fEmail" data-edit="form.label_email">Email</label><input id="fEmail" name="email" type="email" required placeholder="you@business.com"></div>
+              <div class="field"><label for="fPhone" data-edit="form.label_phone">Phone</label><input id="fPhone" name="phone" type="tel" placeholder="(555) 000-0000"></div>
             </div>
-            <div class="field"><label for="fWebsite" data-edit="form.label_website">Website</label><input id="fWebsite" type="text" placeholder="www.yourbusiness.com"></div>
-            <div class="field"><label for="fAbout" data-edit="form.label_about">Tell us about your business</label><textarea id="fAbout" required placeholder="What do you do, and who do you serve?"></textarea></div>
-            <div class="field"><label for="fGoal" data-edit="form.label_goal">What are you hoping to accomplish?</label><textarea id="fGoal" required placeholder="Launch, grow, optimize or elevate — tell us your goal."></textarea></div>
+            <div class="field"><label for="fWebsite" data-edit="form.label_website">Website</label><input id="fWebsite" name="website" type="text" placeholder="www.yourbusiness.com"></div>
+            <div class="field"><label for="fAbout" data-edit="form.label_about">Tell us about your business</label><textarea id="fAbout" name="about" required placeholder="What do you do, and who do you serve?"></textarea></div>
+            <div class="field"><label for="fGoal" data-edit="form.label_goal">What are you hoping to accomplish?</label><textarea id="fGoal" name="goal" required placeholder="Launch, grow, optimize or elevate — tell us your goal."></textarea></div>
             <button type="submit" class="btn btn-gold">Start the conversation
               <svg viewBox="0 0 24 24" fill="none"><path d="M6 18L18 6M18 6H9M18 6v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -920,12 +922,25 @@ Today, I bring that same philosophy to every client I work with. As your Busines
       about: document.getElementById('fAbout').value,
       goal: document.getElementById('fGoal').value
     };
-    fetch('/.netlify/functions/submit-inquiry', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(payload)
-    }).then(function(res){
-      if(!res.ok) throw new Error('Request failed');
+    var netlifyBody = new URLSearchParams();
+    netlifyBody.set('form-name', 'contact');
+    Object.keys(payload).forEach(function(k){ netlifyBody.set(k, payload[k]); });
+
+    var requests = [
+      fetch('/.netlify/functions/submit-inquiry', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      }),
+      fetch('/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: netlifyBody.toString()
+      })
+    ];
+    Promise.allSettled(requests).then(function(results){
+      var anyOk = results.some(function(r){ return r.status === 'fulfilled' && r.value.ok; });
+      if(!anyOk) throw new Error('Both submissions failed');
       form.style.display = 'none';
       success.classList.add('show');
     }).catch(function(){
